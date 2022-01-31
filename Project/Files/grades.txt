@@ -1,3 +1,0 @@
-﻿name, class, grade
-joe, gym, b
-jane, chemistry, c
