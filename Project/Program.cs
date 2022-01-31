@@ -30,7 +30,7 @@ namespace Project
                   
                   if (File.Exists(fs))
                   {
-                      FileStream file = new FileStream(@"C:\Users\barry\source\A1TicketingSystem\Project\Files\tickets.csv", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                      FileStream file = new FileStream("Files/tickets.csv", FileMode.OpenOrCreate, FileAccess.ReadWrite);
                       StreamReader sr = new StreamReader(file);
                       string line = sr.ReadLine();
                       line.Split(',');
@@ -70,7 +70,7 @@ namespace Project
               else if (menuAnswer == '2')
               {
                     
-                  FileStream fileTicketNum = new FileStream(@"C:\Users\barry\source\A1TicketingSystem\Project\Files\tickets.csv", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                  FileStream fileTicketNum = new FileStream("Files/tickets.csv", FileMode.OpenOrCreate, FileAccess.ReadWrite);
                   StreamReader sr = new StreamReader(fileTicketNum);
                   string line = sr.ReadLine();  
                   //To get last ticket number
@@ -114,7 +114,7 @@ namespace Project
                          }
                     }
                     
-                    FileStream file = new FileStream(@"C:\Users\barry\source\A1TicketingSystem\Project\Files\tickets.csv", FileMode.Append, FileAccess.Write);
+                    FileStream file = new FileStream("Files/tickets.csv", FileMode.Append, FileAccess.Write);
 
                     //write file
                    StreamWriter sw = new StreamWriter(file);
