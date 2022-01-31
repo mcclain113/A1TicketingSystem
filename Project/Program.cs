@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.IO;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace Project
@@ -17,14 +19,18 @@ namespace Project
 
           while (menuAnswer != 'q')
           {
-              string file = "Files/tickets.csv";
-                if (menuAnswer == '1')
+              
+              string fs = "Files/tickets.csv";
+             
+              
+              if (menuAnswer == '1')
               {
 
                   //read file
                   
-                  if (File.Exists(file))
+                  if (File.Exists(fs))
                   {
+                      FileStream file = new FileStream(@"C:\Users\barry\source\A1TicketingSystem\Project\Files\tickets.csv", FileMode.OpenOrCreate, FileAccess.ReadWrite);
                       StreamReader sr = new StreamReader(file);
                       string line = sr.ReadLine();
                       line.Split(',');
@@ -44,7 +50,9 @@ namespace Project
                               column[0], column[1], column[2], column[3], column[4], column[5], column[6]);
                       }
 
+                      
                       sr.Close();
+                        file.Close();
                   }
                   
                   Console.WriteLine("\n\n");
@@ -62,13 +70,20 @@ namespace Project
               else if (menuAnswer == '2')
               {
                     
-
-                    //To get last ticket number
-                    var lastLine = File.ReadLines(file).Last();
+                  FileStream fileTicketNum = new FileStream(@"C:\Users\barry\source\A1TicketingSystem\Project\Files\tickets.csv", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                  StreamReader sr = new StreamReader(fileTicketNum);
+                  string line = sr.ReadLine();  
+                  //To get last ticket number
+                    var lastLine = "";
+                    while (sr.EndOfStream == false)
+                    {
+                        lastLine = sr.ReadLine();
+                    }
                     var columnSplitForId = lastLine.Split(',');
                     var ticketId = columnSplitForId[0];
                     int nextTicketId = Convert.ToInt32(ticketId) + 1;
-                    
+                    sr.Close();
+                    fileTicketNum.Close();
 
                     
                     Console.WriteLine("\n\n");
@@ -98,19 +113,24 @@ namespace Project
 
                          }
                     }
-
+                    
+                    FileStream file = new FileStream(@"C:\Users\barry\source\A1TicketingSystem\Project\Files\tickets.csv", FileMode.Append, FileAccess.Write);
 
                     //write file
-                   StreamWriter sw = new StreamWriter(file, true);
+                   StreamWriter sw = new StreamWriter(file);
+                
 
                     string newTicket = nextTicketId + "," + summary + "," +status + "," + priority +
                                        "," + submitter + "," + assigned + "," + watching;
+                   
 
 
-
+                    
                     sw.WriteLine(newTicket);
-       
+                    sw.Flush();
                     sw.Close();
+                    file.Close();
+                    
 
                    // File.AppendAllText(@"C:\Users\barry\source\A1TicketingSystem\Project\Files\tickets.csv", newTicket);
   
