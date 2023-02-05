@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\barry\\source\\A1TicketingSystem\\Project\\Project.csproj": {}
+    "C:\\Users\\051686\\RiderProjects\\A1-TicketingSystem\\Project\\Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\barry\\source\\A1TicketingSystem\\Project\\Project.csproj": {
+    "C:\\Users\\051686\\RiderProjects\\A1-TicketingSystem\\Project\\Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\barry\\source\\A1TicketingSystem\\Project\\Project.csproj",
+        "projectUniqueName": "C:\\Users\\051686\\RiderProjects\\A1-TicketingSystem\\Project\\Project.csproj",
         "projectName": "Project",
-        "projectPath": "C:\\Users\\barry\\source\\A1TicketingSystem\\Project\\Project.csproj",
-        "packagesPath": "C:\\Users\\barry\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\barry\\source\\A1TicketingSystem\\Project\\obj\\",
+        "projectPath": "C:\\Users\\051686\\RiderProjects\\A1-TicketingSystem\\Project\\Project.csproj",
+        "packagesPath": "C:\\Users\\051686\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\051686\\RiderProjects\\A1-TicketingSystem\\Project\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\barry\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\051686\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -45,7 +45,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -54,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

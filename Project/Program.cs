@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
 namespace Project
@@ -10,67 +11,85 @@ namespace Project
     {
         static void Main(string[] args)
         {
-          Console.WriteLine("Welcome to the WCTC Ticketing System Menu");
-          Console.WriteLine("1. Review Ticket Log");
-          Console.WriteLine("2. Create New Ticket");
-          Console.WriteLine(".........................................");
-          Console.Write("Please Enter Menu Number (q for quit): ");
-          var menuAnswer = Console.ReadLine().ToLower()[0];
+            MenuGenerator();
 
-          while (menuAnswer != 'q')
-          {
-              
-              string fs = "Files/tickets.csv";
-             
-              
-              if (menuAnswer == '1')
-              {
+        }
+        
+        public static void MenuGenerator()
+        {
 
-                  //read file
-                  
-                  if (File.Exists(fs))
-                  {
-                      FileStream file = new FileStream("Files/tickets.csv", FileMode.OpenOrCreate, FileAccess.ReadWrite);
-                      StreamReader sr = new StreamReader(file);
-                      string line = sr.ReadLine();
-                      line.Split(',');
-                      Console.WriteLine("\n\n");
+            char menuAnswer = 'a';
 
+            while (menuAnswer != 'q')
+            {
+                Console.WriteLine("Welcome to the WCTC Ticketing System Menu");
+                Console.WriteLine("1. Review Ticket Log");
+                Console.WriteLine("2. Create New Ticket");
+                Console.WriteLine(".........................................");
+                Console.Write("Please Enter Menu Number (q for quit): ");
+                menuAnswer = Console.ReadLine().ToLower()[0];
 
+                if (menuAnswer == '1')
+                {
+                    ReadFile();
+                }
 
-
-                        while (!sr.EndOfStream)
-
-                      {
-                          line = sr.ReadLine();
-                          var column = line.Split(',');
-
-                          Console.WriteLine(
-                              "TicketID: {0}, Summary: {1}, Status: {2}, Priority: {3}, Submitter: {4}, Assigned: {5}, Watching: {6}",
-                              column[0], column[1], column[2], column[3], column[4], column[5], column[6]);
-                      }
-
-                      
-                      sr.Close();
-                        file.Close();
-                  }
-                  
-                  Console.WriteLine("\n\n");
-                  Console.WriteLine("Welcome to the WCTC Ticketing System Menu");
-                  Console.WriteLine("1. Review Ticket Log");
-                  Console.WriteLine("2. Create New Ticket");
-                  Console.WriteLine(".........................................");
-                  Console.Write("Please Enter Menu Number (q for quit): ");
-                  menuAnswer = Console.ReadLine().ToLower()[0];
-
-
-
-
-              }
-              else if (menuAnswer == '2')
-              {
+                else if (menuAnswer == '2')
+                {
+                    NewTicket();
+                }
+                else if (menuAnswer == 'q')
+                {
+                    Exit();
+                }
+                else
+                {
+                    Console.WriteLine("\n\n");
+                    Console.WriteLine("Try again\n\n");
+                }
                     
-                  FileStream fileTicketNum = new FileStream("Files/tickets.csv", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            }
+        }
+        public static void ReadFile()
+        {
+
+            string fs = "Files/tickets.csv";
+            if (File.Exists(fs))
+                
+            {
+                FileStream file = new FileStream("Files/tickets.csv", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                StreamReader sr = new StreamReader(file);
+                var line = sr.ReadLine();
+
+                Console.WriteLine($"TicketID, Summary, Status, Priority, Submitter, Assigned, Watching");
+                while (!sr.EndOfStream)
+
+                {
+                    
+                    line = sr.ReadLine();
+                    string[] column = line.Split(',');
+
+                    
+                    Console.WriteLine(
+                        "{0}, {1}, {2}, {3}, {4}, {5}, {6}",
+                        column[0], column[1], column[2], column[3], column[4], column[5], column[6]);
+
+                }
+                sr.Close();
+                file.Close();
+                
+            }
+            else
+            {
+                Console.WriteLine("No List.");
+            }
+
+            
+        }
+
+        public static void NewTicket()
+        {
+            FileStream fileTicketNum = new FileStream("Files/tickets.csv", FileMode.OpenOrCreate, FileAccess.ReadWrite);
                   StreamReader sr = new StreamReader(fileTicketNum);
                   string line = sr.ReadLine();  
                   //To get last ticket number
@@ -130,39 +149,16 @@ namespace Project
                     sw.Flush();
                     sw.Close();
                     file.Close();
-                    
 
-                   // File.AppendAllText(@"C:\Users\barry\source\A1TicketingSystem\Project\Files\tickets.csv", newTicket);
-  
                     Console.WriteLine("Ticket Added");
-
-                    
-
-                  Console.WriteLine("\n\n");
-                  Console.WriteLine("Welcome to the WCTC Ticketing System Menu");
-                  Console.WriteLine("1. Review Ticket Log");
-                  Console.WriteLine("2. Create New Ticket");
-                  Console.WriteLine(".........................................");
-                  Console.Write("Please Enter Menu Number (q for quit): ");
-                  menuAnswer = Console.ReadLine().ToLower()[0];
-              }
-
-              else
-              {
-                    Console.WriteLine("\n\n");
-                    Console.WriteLine("Try again\n\n");
-                    Console.WriteLine("Welcome to the WCTC Ticketing System Menu");
-                    Console.WriteLine("1. Review Ticket Log");
-                    Console.WriteLine("2. Create New Ticket");
-                    Console.WriteLine(".........................................");
-                    Console.Write("Please Enter Menu Number (q for quit): ");
-                    menuAnswer = Console.ReadLine().ToLower()[0];
-              }
-          }
-
-          Console.WriteLine("\n\n");
-          Console.WriteLine("Thank you for using the WCTC Ticketing System");
-
         }
+
+        public static void Exit()
+        {
+            
+            Console.WriteLine("\n\n");
+            Console.WriteLine("Thank you for using the WCTC Ticketing System");
+        }
+
     }
 }
